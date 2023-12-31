@@ -1,14 +1,23 @@
-// src/firebase.js
-import firebase from 'firebase/app';
-import 'firebase/auth';
-import 'firebase/firestore';
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
 
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  // Your Firebase config object obtained from Firebase Console
+  apiKey: "AIzaSyAL1hojXtYTZxUtkNLw_LbRHWr_KsZb7fA",
+  authDomain: "insta-auth-3cdf3.firebaseapp.com",
+  projectId: "insta-auth-3cdf3",
+  storageBucket: "insta-auth-3cdf3.appspot.com",
+  messagingSenderId: "865292713076",
+  appId: "1:865292713076:web:00b74262c1ed0da38fa521",
+  measurementId: "G-DKV454V4HE"
 };
 
-firebase.initializeApp(firebaseConfig);
-
-export const auth = firebase.auth();
-export const firestore = firebase.firestore();
-export default firebase;
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+analytics.logEvent('user_engagement', {user_id: '1234'});
+export default app;
