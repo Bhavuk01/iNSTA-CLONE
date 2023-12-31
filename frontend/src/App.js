@@ -4,18 +4,18 @@ import Loginform from './components/Loginform';
 import AuthPage from './components/AuthPage';
 
 const App = () => {
-  return (
+ return (
     <Router>
       <div>
-        <Route>
+        <Switch>
           <Route path="/" exact component={AuthPage} />
           <Route path="/home" component={Loginform} />
-        </Route>
-          
-          {/* Add more routes for other pages */}
+        </Switch>
+
+        {/* Add more routes for other pages */}
       </div>
     </Router>
-  );
+ );
 };
 
 export default App;
