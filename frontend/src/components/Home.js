@@ -1,11 +1,7 @@
-import React, { useState } from 'react';
-import RegistrationForm from './RegistrationForm';
-import LoginForm from './Loginform';
-import "./AuthPage.css"
-
-const AuthPage = () => {
-  const [isLogin, setIsLogin] = useState(true);
-
+import React from 'react'
+import './Home.css'
+import { Link } from 'react-router-dom'
+const Home = () => {
   return (
     <div>
       <div id="wrapper">
@@ -14,7 +10,7 @@ const AuthPage = () => {
           <div className="form-data">
             <form action="">
               <div className="logo">
-                <h1>Instagram</h1>
+                <h1>Photogram</h1>
               </div>
               <input
                 type="text"
@@ -28,12 +24,12 @@ const AuthPage = () => {
               <a href="#" className="facebook-login">
                 <i className="fab fa-facebook" /> Log in with Facebook
               </a>
-              <a className="password-reset" href="#">
-                Forgot password?
+              <a className="password-reset">
+              <Link to="/Forgot">Forgot password?</Link>
               </a>
             </form>
             <div className="sign-up">
-              Don't an account? <a href="RegistrationForm">Sign up</a>
+              Don't an account? <Link to="/signup">Sign up</Link>
             </div>
             <div className="get-the-app">
               <span>Get the app</span>
@@ -52,8 +48,7 @@ const AuthPage = () => {
         </div>
       </div>
     </div>
-    
-  );
-};
+  )
+}
 
-export default AuthPage;
+export default Home

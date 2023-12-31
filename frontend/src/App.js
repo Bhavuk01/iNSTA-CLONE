@@ -1,22 +1,24 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
-import Loginform from './components/Loginform';
-import AuthPage from './components/AuthPage';
+import Home from './components/Home';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Signup from './components/Signup';
+import Forgot from './components/Forgot';
 
 const App = () => {
- return (
-    <Router>
-      <div>
-        <Switch>
-          <Route path="/" exact component={AuthPage} />
-          <Route path="/home" component={Loginform} />
-        </Switch>
-
-        {/* Add more routes for other pages */}
-      </div>
-    </Router>
- );
+  return (
+    <div>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} /> {/* Use "element" instead of "component" */}
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/forgot" element={<Forgot />} />
+        </Routes>
+      </Router>
+    </div>
+  );
 };
 
 export default App;
+
+
 
