@@ -3,6 +3,8 @@ import Home from './components/Home';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Signup from './components/Signup';
 import Forgot from './components/Forgot';
+import { ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
   return (
@@ -14,6 +16,7 @@ const App = () => {
           <Route path="/forgot" element={<Forgot />} />
         </Routes>
       </Router>
+      <ToastContainer/>
     </div>
   );
 };
