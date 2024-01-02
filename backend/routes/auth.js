@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
-const USER = mongoose.model("USER");
+const User = mongoose.model("USER");
 
 router.get('/', (req, res) => {
     res.send('API is working');
@@ -9,23 +9,26 @@ router.get('/', (req, res) => {
 
 router.post("/signup", (req, res) => {
     const { fullname, userName, email, password } = req.body;
+    if (!fullname || !userName || !email || !password) {
+        return res.status(400).json({ msg: "Please enter all fields" });
+    }
 
-    const user = new USER({
-        fullname,
-        userName,
-        email,
-        password
-    });
+    User.findOne({ $or: [{ email: email }, { userName: userName }] })
+        .then(savedUser => {
+            if (savedUser) {
+                return res.status(409).json({ message: "Email or username already exists" });
+            }
+            const user = new User({
+                name,
+                email,
+                userName,
+                password: hashedPassword
+            })
 
-    user.save()
-        .then(user => {
-            res.json({ message: "Saved successfully" });
+            user.save()
+                .then(user => { res.json({ message: "Registered successfully" }) })
+                .catch(err => { console.log(err) })
         })
-        .catch(err => {
-            console.log(err);
-            res.status(500).json({ error: "Failed to save user" });
         });
-});
 
 module.exports = router;
-
