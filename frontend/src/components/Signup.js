@@ -2,15 +2,7 @@ import React, { useState , useEffect } from 'react';
 import './Signup.css'
 export default function  Signup  ()  {
 
-const fetchData = async()=>{
-  const response = await fetch("http://localhost:5000")
-  const data = await response.json()
-  console.log(data)
-}
 
-useEffect(() => {
-  fetchData()
- }, []);
  
 
   const [formData, setFormData] = useState({
