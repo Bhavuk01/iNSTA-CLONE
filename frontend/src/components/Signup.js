@@ -1,4 +1,4 @@
-import React, {useState } from "react";
+import React, { useState } from "react";
 
 import "./Signup.css";
 import { Link, useNavigate } from "react-router-dom";
@@ -49,7 +49,7 @@ export default function SignUp() {
           notifyA(data.error)
         } else {
           notifyB(data.message)
-          navigate("/")
+          navigate("/signin")
         }
         console.log(data)
       })
