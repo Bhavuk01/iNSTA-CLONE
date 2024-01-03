@@ -1,0 +1,49 @@
+/* Signin.css */
+
+.signIn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #fafafa;
+}
+
+.loginForm {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 300px;
+}
+
+.loginForm input {
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 10px;
+  border-radius: 3px;
+  border: 1px solid #ddd;
+}
+
+.loginForm #login-btn {
+  background-color: #3897f0;
+  color: white;
+  border: none;
+  cursor: pointer;
+  padding: 10px 0;
+  border-radius: 3px;
+}
+
+.loginForm #login-btn:hover {
+  background-color: #2684f0;
+}
+
+.loginForm2 {
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.loginForm2 span {
+  color: #3897f0;
+  cursor: pointer;
+}

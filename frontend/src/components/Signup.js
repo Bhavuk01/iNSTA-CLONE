@@ -8,7 +8,7 @@ import { toast } from 'react-toastify';
 
 export default function SignUp() {
   const navigate = useNavigate()
-  const [name, setName] = useState("");
+  const [name, setName] = useState(""); 
   const [email, setEmail] = useState("")
   const [userName, setUserName] = useState("")
   const [password, setPassword] = useState("")
@@ -49,7 +49,7 @@ export default function SignUp() {
           notifyA(data.error)
         } else {
           notifyB(data.message)
-          navigate("/signin")
+          navigate("/home")
         }
         console.log(data)
       })
@@ -100,7 +100,7 @@ export default function SignUp() {
         </div>
         <div className="form2">
           Already have an account ?
-          <Link to="/signin">
+          <Link to="/">
             <span style={{ color: "blue", cursor: "pointer" }}>Sign In</span>
           </Link>
         </div>
