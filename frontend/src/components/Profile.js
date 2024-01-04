@@ -1,5 +1,5 @@
 import React from 'react'
-
+import './Profile.css'
 const Profile = () => {
   return (
     <div>
@@ -13,8 +13,8 @@ const Profile = () => {
                     <img src="https://rukminim2.flixcart.com/image/850/1000/l4iscy80/poster/t/1/5/small-sidhu-moose-wala-punjabi-singer-poster-multicolor-photo-original-imagfedrzf7hwuku.jpeg?q=90" alt="" />
                 </div>
                 <div className="user-info">
-                    <h2>John Doe</h2>
-                    <span>@john_doe</span>
+                    <h2>Sidhu Moosse Wala</h2>
+                    <span>@moose_ala_sidhu</span>
                 </div>
             </div>
             {/*card image*/}
@@ -23,10 +23,16 @@ const Profile = () => {
             </div>
             {/*card content*/}
             <div className="card-content">
-                <ul>
-                    <li><strong>Followers:</strong> 35487</li>
-                </ul>
-            </div>
+            <span class="material-symbols-outlined">favorite</span>
+            <p>1 Like</p>
+            <p>This is amzing</p>
+             </div>
+             {/*add comment*/}
+             <div className="add-comment">
+             <span class="material-symbols-outlined">mood</span> 
+             <input type="text" placeholder='add a comments' />
+             <button className='comment'>Add a comments</button>
+             </div>
         </div>
     </div>
   )
