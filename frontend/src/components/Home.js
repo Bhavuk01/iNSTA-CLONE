@@ -35,15 +35,15 @@ const Home = () => {
             </div>
             {/*card content*/}
             <div className="card-content">
-            <span class="material-symbols-outlined">favorite</span>
+            <span className="material-symbols-outlined">favorite</span>
             <p>1 Like</p>
             <p>This is amzing</p>
              </div>
              {/*add comment*/}
              <div className="add-comment">
-             <span class="material-symbols-outlined">mood</span> 
+             <span className="material-symbols-outlined">mood</span> 
              <input type="text" placeholder='add a comments' />
-             <button className='comment'>Add a comments</button>
+             <button className='comment'>Post</button>
              </div>
         </div>
     </div>
