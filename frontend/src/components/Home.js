@@ -46,6 +46,7 @@ const Home = () => {
              <button className='comment'>Post</button>
              </div>
         </div>
+        
     </div>
 
   )

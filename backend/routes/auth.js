@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const USER = mongoose.model("USER");
 const bcrypt = require('bcrypt');
 
-//
+
 router.get('/', (req, res) => {
     res.send("hello")
 })
