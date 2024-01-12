@@ -15,7 +15,7 @@ const Home = () => {
         <a href="#"><img src="https://cdn1.iconfinder.com/data/icons/instagram-feature-outline/32/icon_instagram-22-512.png" alt="Explore" /></a>
         <a href="#"><img src="https://w7.pngwing.com/pngs/387/843/png-transparent-favorite-heart-like-likes-love-loved-basic-ui-2-line-icon.png" alt="Activity" /></a>
         <a href="/profile"><img src="https://cdn2.iconfinder.com/data/icons/instagram-outline/19/11-512.png" alt="Profile" /></a>
-        <a href="/post"><img src="https://static.thenounproject.com/png/4374665-200.png" alt="Createpost" /></a>
+        <a href="/createpost"><img src="https://static.thenounproject.com/png/4374665-200.png" alt="Createpost" /></a>
       </div>
     </nav>
     <div className="card">

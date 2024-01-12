@@ -5,9 +5,9 @@ import Signup from './components/Signup';
 import Forgot from './components/Forgot';
 import Home from './components/Home';
 import Profile from './components/Profile';
-import PostDetail from './components/PostDetail'
 import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import CreatePost from './components/CreatePost';
 
 const App = () => {
   return (
@@ -19,7 +19,7 @@ const App = () => {
           <Route path="/forgot" element={<Forgot />} />
           <Route path="/home" element={<Home />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/post" element={<PostDetail />} />
+          <Route path="/createpost" element={<CreatePost />} />
           
         </Routes>
       </Router>
