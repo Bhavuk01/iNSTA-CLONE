@@ -2,37 +2,36 @@ import React from 'react'
 import './Profile.css'
 const Profile = () => {
   return (
-    <div>
-        <h1>Profile</h1>
-        <p>This is the profile page. You can put whatever you want here.</p>
-        <div className="card">
+    <div className="profile">
+        {/* Profile frame */}
+        <div className="profile-frame">
+            <div className="profile-pic">
+               <img src="https://i.pinimg.com/originals/55/a0/ab/55a0ab1054f257b61efed032c9bbc85c.jpg" alt="" /> 
+            </div>  
+            <div className="profile-data">
+                <h1>Sidhu Moosewala</h1>
+                <div className="profile-info">
+                    <p>40 posts</p>
+                    <p>40 follwers</p>
+                    <p>40 following</p>
+                </div>
+            </div>
+        </div>
 
-            {/*card Header*/}
-            <div className="card-header">
-                <div className="card-pic">
-                    <img src="https://rukminim2.flixcart.com/image/850/1000/l4iscy80/poster/t/1/5/small-sidhu-moose-wala-punjabi-singer-poster-multicolor-photo-original-imagfedrzf7hwuku.jpeg?q=90" alt="" />
-                </div>
-                <div className="user-info">
-                    <h2>Sidhu Moosse Wala</h2>
-                    <span>@moose_ala_sidhu</span>
-                </div>
-            </div>
-            {/*card image*/}
-            <div className="card-image">
-                <img src="https://e0.pxfuel.com/wallpapers/248/815/desktop-wallpaper-sidhu-moose-wala-black-black-background-thumbnail.jpg" alt="" />
-            </div>
-            {/*card content*/}
-            <div className="card-content">
-            <span class="material-symbols-outlined">favorite</span>
-            <p>1 Like</p>
-            <p>This is amzing</p>
-             </div>
-             {/*add comment*/}
-             <div className="add-comment">
-             <span class="material-symbols-outlined">mood</span> 
-             <input type="text" placeholder='add a comments' />
-             <button className='comment'>Add a comments</button>
-             </div>
+        <hr style={{
+          width: "90%",
+          opacity: "0.8",
+          margin: "25px auto",
+        }} />
+
+        {/*Posts*/}
+        <div className="gallery">
+        <img src="https://i.pinimg.com/originals/55/a0/ab/55a0ab1054f257b61efed032c9bbc85c.jpg" alt="" />
+        <img src="https://i.pinimg.com/originals/55/a0/ab/55a0ab1054f257b61efed032c9bbc85c.jpg" alt="" />
+        <img src="https://i.pinimg.com/originals/55/a0/ab/55a0ab1054f257b61efed032c9bbc85c.jpg" alt="" />
+        <img src="https://i.pinimg.com/originals/55/a0/ab/55a0ab1054f257b61efed032c9bbc85c.jpg" alt="" />
+        <img src="https://i.pinimg.com/originals/55/a0/ab/55a0ab1054f257b61efed032c9bbc85c.jpg" alt="" />
+        <img src="https://i.pinimg.com/originals/55/a0/ab/55a0ab1054f257b61efed032c9bbc85c.jpg" alt="" />
         </div>
     </div>
   )
