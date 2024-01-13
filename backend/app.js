@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
-const {mongoUrl} = require("./keys")
+const { mongoUrl } = require("./keys")
 const cors = require("cors")
 
 app.use(cors())
