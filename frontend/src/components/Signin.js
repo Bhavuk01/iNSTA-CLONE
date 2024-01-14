@@ -3,7 +3,9 @@ import "./Signin.css";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 
-export default function Signin() {
+
+export default function SignIn() {
+
   const navigate = useNavigate();
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
@@ -21,7 +23,7 @@ export default function Signin() {
       return
     }
     // Sending data to server
-    fetch("http://localhost:5000/", {
+    fetch("http://localhost:5000", {
       method: "post",
       headers: {
         "Content-Type": "application/json"
@@ -38,6 +40,9 @@ export default function Signin() {
         } else {
           notifyB("Signed In Successfully")
           console.log(data)
+          localStorage.setItem("jwt", data)
+          localStorage.setItem("user", JSON.stringify(data.user))
+
           
           navigate("/home")
         }
@@ -49,7 +54,7 @@ export default function Signin() {
     <div className="signIn">
       <div>
         <div className="loginForm">
-          
+         {/*<img className="signUpLogo" src={} alt="" /> */}
           <div>
             <input type="email" name="email" id="email" value={email} placeholder="Email" onChange={(e) => { setEmail(e.target.value) }} />
           </div>
