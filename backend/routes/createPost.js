@@ -14,13 +14,13 @@ router.post("/createPost",requireLogin,(req,res)=>{
     const post = new POST({
         title: title,
         body: body,
-        postedBy:req.user
+        postedBy : req.user
     })
     post.save().then((result)=>{
         return res.json({post:result})
     }).catch(err=>{
         console.log(err);
     })
-    res.json("ok")
+    //res.json("ok")
 })
 module.exports= router

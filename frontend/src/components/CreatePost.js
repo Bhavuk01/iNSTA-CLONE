@@ -51,14 +51,14 @@ export default function Createpost() {
     const data = new FormData()
     data.append("file", image)
     data.append("upload_preset", "insta-clone")
-    data.append("cloud_name", "cantacloud2")
-    fetch("https://api.cloudinary.com/v1_1/cantacloud2/image/upload", {
+    data.append("cloud_name", "badboe")
+    fetch("https://api.cloudinary.com/v1_1/insta-clone/image/upload", {
       method: "post",
       body: data
     }).then(res => res.json())
-      .then(data => setUrl(data.url))
+      .then(data => console.log(data))
       .catch(err => console.log(err))
-    console.log(url)
+    //console.log(url)
 
   }
 
