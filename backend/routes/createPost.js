@@ -28,4 +28,27 @@ router.post("/createPost",requireLogin,(req,res)=>{
     })
     //res.json("ok")
 })
+
+router.get("/myposts", requireLogin, (req, res) => {
+    POST.find({ postedBy: req.user._id })
+        .populate("postedBy", "_id name")
+        //.populate("comments.postedBy", "_id name")
+        .sort("-createdAt")
+        .then(myposts => {
+            res.json(myposts)
+        })
+})
+
+router.put("/like",requireLogin,(rq,res)=>{
+    POST.findByIdAndUpdate(req.body.postId,{
+        $push:{likes:req.user._id},
+    },{
+        new:true
+    }).exec((err,result)=>{
+        if(err){return res.status(422).json({error: err})
+    } else{
+            res.json(result)
+}
+)
+})
 module.exports= router
