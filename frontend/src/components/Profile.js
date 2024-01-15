@@ -36,7 +36,7 @@ const Profile = () => {
                <img src="https://i.pinimg.com/originals/55/a0/ab/55a0ab1054f257b61efed032c9bbc85c.jpg" alt="" /> 
             </div>  
             <div className="profile-data">
-                <h1>Sidhu Moosewala</h1>
+                <h1>{JSON.parse(localStorage.getItem("user")).name}</h1>
                 <div className="profile-info">
                     <p>40 posts</p>
                     <p>40 follwers</p>

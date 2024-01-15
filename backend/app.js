@@ -12,6 +12,8 @@ require('./models/post');
 app.use(express.json());
 app.use(require("./routes/auth"));
 app.use(require("./routes/createPost"));
+app.use(require("./routes/user"));
+
 
 // Update your MongoDB connection URI with the database name
 mongoose.connect("mongodb+srv://bhavuk1668be21:n8VydeoG5TTKOu0s@cluster0.yfmkc17.mongodb.net/insta-auth", {

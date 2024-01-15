@@ -8,6 +8,7 @@ import Profile from './components/Profile';
 import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import CreatePost from './components/CreatePost';
+import UserProfie from './components/UserProfile';
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
           <Route path="/home" element={<Home />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/createpost" element={<CreatePost />} />
+          <Route path="/profile/:id" element={<UserProfie />} />
           
         </Routes>
       </Router>

@@ -1,18 +1,50 @@
-import React, { useEffect,useState } from 'react'
-import "./Home.css"
-const Home = () => {
-  const [data,setData] = useState([])
+import React, { useEffect, useState } from "react";
+import "./Home.css";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
-  useEffect(() =>{
-    fetch('http://localhost:5000/allposts',{
+export default function Home() {
+  var picLink = "https://cdn-icons-png.flaticon.com/128/3177/3177440.png"
+  const navigate = useNavigate();
+  const [data, setData] = useState([]);
+  const [comment, setComment] = useState("");
+  const [show, setShow] = useState(false);
+  const [item, setItem] = useState([]);
+
+  // Toast functions
+  const notifyA = (msg) => toast.error(msg);
+  const notifyB = (msg) => toast.success(msg);
+
+  useEffect(() => {
+    const token = localStorage.getItem("jwt");
+    if (!token) {
+      navigate("./signup");
+    }
+
+    // Fetching all posts
+    fetch("http://localhost:5000/allposts", {
       headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer " + localStorage.getItem("jwt")
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
       },
-    }).then(res=>res.json())
-    .then(result => setData(result))
-    .catch(err => console.log(err));
-  })
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        console.log(result);
+        setData(result);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
+  // to show and hide comments
+  const toggleComment = (posts) => {
+    if (show) {
+      setShow(false);
+    } else {
+      setShow(true);
+      setItem(posts);
+    }
+  };
 
   const likePost = (id) => {
     fetch("http://localhost:5000/like", {
@@ -62,69 +94,204 @@ const Home = () => {
         console.log(result);
       });
   };
+
+  // function to make comment
+  const makeComment = (text, id) => {
+    fetch("http://localhost:5000/comment", {
+      method: "put",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
+      },
+      body: JSON.stringify({
+        text: text,
+        postId: id,
+      }),
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        const newData = data.map((posts) => {
+          if (posts._id == result._id) {
+            return result;
+          } else {
+            return posts;
+          }
+        });
+        setData(newData);
+        setComment("");
+        notifyB("Comment posted");
+        console.log(result);
+      });
+  };
+
   return (
-    <div>
-        <nav className="navbar">
-      <div className="logo">
-        <img src="https://www.edigitalagency.com.au/wp-content/uploads/Instagram-logo-black-white-horizontal-png.png" alt="Instagram Logo" />
-      </div>
-      <div className="search-bar">
-        <input type="text" placeholder="Search" />
-      </div>
-      <div className="nav-icons">
-        <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/25/25694.png" alt="Home" /></a>
-        <a href="#"><img src="https://cdn1.iconfinder.com/data/icons/instagram-feature-outline/32/icon_instagram-22-512.png" alt="Explore" /></a>
-        <a href="#"><img src="https://w7.pngwing.com/pngs/387/843/png-transparent-favorite-heart-like-likes-love-loved-basic-ui-2-line-icon.png" alt="Activity" /></a>
-        <a href="/profile"><img src="https://cdn2.iconfinder.com/data/icons/instagram-outline/19/11-512.png" alt="Profile" /></a>
-        <a href="/createpost"><img src="https://static.thenounproject.com/png/4374665-200.png" alt="Createpost" /></a>
-      </div>
-    </nav>
-    
     <div className="home">
-      
-    </div>
-
-           
-            {data.map((posts)=>{
-              return(
-                 <div className="card">
+      {/* card */}
+      {data.map((posts) => {
+        return (
+          <div className="card">
+            {/* card header */}
             <div className="card-header">
-                <div className="card-pic">
-                    <img src="https://rukminim2.flixcart.com/image/850/1000/l4iscy80/poster/t/1/5/small-sidhu-moose-wala-punjabi-singer-poster-multicolor-photo-original-imagfedrzf7hwuku.jpeg?q=90" alt="" />
-                </div>
-                <div className="user-info">
-                <h2>{posts.postedBy && posts.postedBy.name}</h2>
-                </div>
+              <div className="card-pic">
+                <img
+                  src={posts.postedBy.Photo ? posts.postedBy.Photo : picLink}
+                  alt=""
+                />
+              </div>
+              <h5>
+                <Link to={`/profile/${posts.postedBy._id}`}>
+                  {posts.postedBy.name}
+                </Link>
+              </h5>
             </div>
-            {/*card image*/}
+            {/* card image */}
             <div className="card-image">
-                 <img src={posts.photo} alt="" />
+              <img src={posts.photo} alt="" />
             </div>
-            {/*card content*/}
+
+            {/* card content */}
             <div className="card-content">
-            <span className="material-symbols-outlined" onClick={() => {
+              {posts.likes.includes(
+                JSON.parse(localStorage.getItem("user"))._id
+              ) ? (
+                <span
+                  className="material-symbols-outlined material-symbols-outlined-red"
+                  onClick={() => {
                     unlikePost(posts._id);
-                  }}>favorite</span>
-            <span className="material-symbols-outlined material-symbols-outlined-red" onClick={() => {
+                  }}
+                >
+                  favorite
+                </span>
+              ) : (
+                <span
+                  className="material-symbols-outlined"
+                  onClick={() => {
                     likePost(posts._id);
-                  }}>favorite</span>
-            <p>1 Like</p>
-            <p>{posts.body}</p>
-             </div>
-             {/*add comment*/}
-             <div className="add-comment">
-             <span className="material-symbols-outlined">mood</span> 
-             <input type="text" placeholder='add a comments' />
-             <button className='comment'>Post</button>
-             </div>
+                  }}
+                >
+                  favorite
+                </span>
+              )}
+
+              <p>{posts.likes.length} Likes</p>
+              <p>{posts.body} </p>
+              <p
+                style={{ fontWeight: "bold", cursor: "pointer" }}
+                onClick={() => {
+                  toggleComment(posts);
+                }}
+              >
+                View all comments
+              </p>
+            </div>
+
+            {/* add Comment */}
+            <div className="add-comment">
+              <span className="material-symbols-outlined">mood</span>
+              <input
+                type="text"
+                placeholder="Add a comment"
+                value={comment}
+                onChange={(e) => {
+                  setComment(e.target.value);
+                }}
+              />
+              <button
+                className="comment"
+                onClick={() => {
+                  makeComment(comment, posts._id);
+                }}
+              >
+                Post
+              </button>
+            </div>
+          </div>
+        );
+      })}
+
+      {/* show Comment */}
+      {show && (
+        <div className="showComment">
+          <div className="container">
+            <div className="postPic">
+              <img src={item.photo} alt="" />
+            </div>
+            <div className="details">
+              {/* card header */}
+              <div
+                className="card-header"
+                style={{ borderBottom: "1px solid #00000029" }}
+              >
+                <div className="card-pic">
+                  <img
+                    src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cGVyc29ufGVufDB8MnwwfHw%3D&auto=format&fit=crop&w=500&q=60"
+                    alt=""
+                  />
+                </div>
+                <h5>{item.postedBy.name}</h5>
+              </div>
+
+              {/* commentSection */}
+              <div
+                className="comment-section"
+                style={{ borderBottom: "1px solid #00000029" }}
+              >
+                {item.comments.map((comment) => {
+                  return (
+                    <p className="comm">
+                      <span
+                        className="commenter"
+                        style={{ fontWeight: "bolder" }}
+                      >
+                        {comment.postedBy.name}{" "}
+                      </span>
+                      <span className="commentText">{comment.comment}</span>
+                    </p>
+                  );
+                })}
+              </div>
+
+              {/* card content */}
+              <div className="card-content">
+                <p>{item.likes.length} Likes</p>
+                <p>{item.body}</p>
+              </div>
+
+              {/* add Comment */}
+              <div className="add-comment">
+                <span className="material-symbols-outlined">mood</span>
+                <input
+                  type="text"
+                  placeholder="Add a comment"
+                  value={comment}
+                  onChange={(e) => {
+                    setComment(e.target.value);
+                  }}
+                />
+                <button
+                  className="comment"
+                  onClick={() => {
+                    makeComment(comment, item._id);
+                    toggleComment();
+                  }}
+                >
+                  Post
+                </button>
+              </div>
+            </div>
+          </div>
+          <div
+            className="close-comment"
+            onClick={() => {
+              toggleComment();
+            }}
+          >
+            <span className="material-symbols-outlined material-symbols-outlined-comment">
+              close
+            </span>
+          </div>
         </div>
-              )      
-            })} 
-           
-        
+      )}
     </div>
-
-  )
+  );
 }
-
-export default Home
