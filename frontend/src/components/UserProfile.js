@@ -59,9 +59,11 @@ export default function UserProfie() {
       .then((res) => res.json())
       .then((result) => {
         console.log(result);
-        setUser(result.user);
-        setPosts(result.post);
+        setUser(result.user || {}); // Handle the case where result.user is undefined
+        setPosts(result.post || []); // Handle the case where result.post is undefined
         if (
+          result.user &&
+          result.user.followers &&
           result.user.followers.includes(
             JSON.parse(localStorage.getItem("user"))._id
           )
@@ -69,7 +71,7 @@ export default function UserProfie() {
           setIsFollow(true);
         }
       });
-  }, [isFollow]);
+  }, [isFollow, userid]);
 
   return (
     <div className="profile">
@@ -77,7 +79,7 @@ export default function UserProfie() {
       <div className="profile-frame">
         {/* profile-pic */}
         <div className="profile-pic">
-          <img src={user.Photo ? user.Photo : picLink} alt="" />
+          <img src={user && user.Photo ? user.Photo : picLink} alt="" />
         </div>
         {/* profile-data */}
         <div className="pofile-data">
@@ -88,7 +90,7 @@ export default function UserProfie() {
               justifyContent: "space-between",
             }}
           >
-            <h1>{user.name}</h1>
+            <h1>{user && user.name}</h1>
             <button
               className="followBtn"
               onClick={() => {
@@ -104,15 +106,14 @@ export default function UserProfie() {
           </div>
           <div className="profile-info" style={{ display: "flex" }}>
             <p>{posts.length} posts</p>
-            <p>{user.followers ? user.followers.length : "0"} followers</p>
-            <p>{user.following ? user.following.length : "0"} following</p>
+            <p>{user && user.followers ? user.followers.length : "0"} followers</p>
+            <p>{user && user.following ? user.following.length : "0"} following</p>
           </div>
         </div>
       </div>
       <hr
         style={{
           width: "90%",
-
           opacity: "0.8",
           margin: "25px auto",
         }}
@@ -124,17 +125,11 @@ export default function UserProfie() {
             <img
               key={pics._id}
               src={pics.photo}
-              // onClick={() => {
-              //     toggleDetails(pics)
-              // }}
               className="item"
             ></img>
           );
         })}
       </div>
-      {/* {show &&
-        <PostDetail item={posts} toggleDetails={toggleDetails} />
-      } */}
     </div>
   );
 }

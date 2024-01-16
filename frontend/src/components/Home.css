@@ -1,3 +1,32 @@
+/* Navbar styles */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #fff;
+  border-bottom: 1px solid #ccc;
+}
+
+.logo img {
+  height: 40px;
+}
+
+.search-bar input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.nav-icons a {
+  margin-left: 15px;
+  text-decoration: none;
+  color: #333;
+}
+
+.nav-icons img {
+  height: 30px;
+}
 .card{
   max-width: 500px;
   height: max-content;
