@@ -26,7 +26,7 @@ mongoose.connect("mongodb+srv://bhavuk1668be21:n8VydeoG5TTKOu0s@cluster0.yfmkc17
   console.error('MongoDB connection error:', err);
 });
 
-const PORT = 5000;
+const PORT = process.env.port || 5000 ;
 app.get("/", (req, res) => {
   res.send({
     message: "Hello World!"
