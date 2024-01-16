@@ -1,64 +1,98 @@
-import React , {useEffect,useState}from 'react'
-import './Profile.css'
-const Profile = () => {
+import React, { useEffect, useState } from "react";
+ import PostDetail from "./PostDetail";
+import "./Profile.css";
+import ProfilePic from "./ProfilePic";
+
+export default function Profie() {
+  var picLink = "https://cdn-icons-png.flaticon.com/128/3177/3177440.png"
   const [pic, setPic] = useState([]);
+  const [show, setShow] = useState(false)
+  const [posts, setPosts] = useState([]);
+  const [user, setUser] = useState("")
+  const [changePic, setChangePic] = useState(false)
+
+
+  const toggleDetails = (posts) => {
+    if (show) {
+      setShow(false);
+    } else {
+      setShow(true);
+      setPosts(posts);
+    }
+  };
+
+  const changeprofile = () => {
+    if (changePic) {
+      setChangePic(false)
+    } else {
+      setChangePic(true)
+    }
+  }
+
 
   useEffect(() => {
-    const apiUrl = process.env.NODE_ENV === 'development'
-      ? 'http://localhost:5000/myposts'
-      : 'https://localhost:5000/myposts';
-  
-    fetch(apiUrl, {
+    fetch(`http://localhost:5000/user/${JSON.parse(localStorage.getItem("user"))._id}`, {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("jwt"),
       },
     })
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error(`HTTP error! Status: ${res.status}`);
-        }
-        return res.json();
-      })
+      .then((res) => res.json())
       .then((result) => {
-        setPic(result);
         console.log(result);
-      })
-      .catch((error) => {
-        console.error("Fetch error:", error);
+        setPic(result.post || []); // Use an empty array if result.post is undefined
+        setUser(result.user);
       });
   }, []);
-  
+
   return (
     <div className="profile">
-        {/* Profile frame */}
-        <div className="profile-frame">
-            <div className="profile-pic">
-               <img src="https://i.pinimg.com/originals/55/a0/ab/55a0ab1054f257b61efed032c9bbc85c.jpg" alt="" /> 
-            </div>  
-            <div className="profile-data">
-                <h1>{JSON.parse(localStorage.getItem("user")).name}</h1>
-                <div className="profile-info">
-                    <p>40 posts</p>
-                    <p>40 follwers</p>
-                    <p>40 following</p>
-                </div>
-            </div>
+      {/* Profile frame */}
+      <div className="profile-frame">
+        {/* profile-pic */}
+        <div className="profile-pic">
+          <img
+            onClick={changeprofile}
+            src={user.Photo ? user.Photo : picLink}
+            alt=""
+          />
         </div>
-
-        <hr style={{
+        {/* profile-data */}
+        <div className="pofile-data">
+          <h1>{JSON.parse(localStorage.getItem("user")).name}</h1>
+          <div className="profile-info" style={{ display: "flex" }}>
+            <p>{pic ? pic.length : "0"} posts</p>
+            <p>{user.followers ? user.followers.length : "0"} followers</p>
+            <p>{user.following ? user.following.length : "0"} following</p>
+          </div>
+        </div>
+      </div>
+      <hr
+        style={{
           width: "90%",
+
           opacity: "0.8",
           margin: "25px auto",
-        }} />
-
-        {/*Posts*/}
-        <div className="gallery">
-  {pic.map((pics) => {
-    return <img key={"_pics.id"}src={pics.photo} className="item" alt="" />;
-  })}
-</div>
-        </div>
-  )
+        }}
+      />
+      {/* Gallery */}
+      <div className="gallery">
+        {pic?.map((pics) => (
+          <img
+            key={pics._id}
+            src={pics.photo}
+            onClick={() => {
+              toggleDetails(pics);
+            }}
+            className="item"
+            alt=""
+          />
+        ))}
+      </div>
+      
+      {
+        changePic &&
+        <ProfilePic changeprofile={changeprofile} />
+      }
+    </div>
+  );
 }
-
-export default Profile

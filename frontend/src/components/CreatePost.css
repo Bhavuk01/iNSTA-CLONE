@@ -1,57 +1,38 @@
-/* Default styles for larger screens */
-.createPost {
+.createPost{
     max-width: 500px;
     margin: 10px auto;
     border: 1px solid rgb(173, 173, 173);
     border-radius: 5px;
 }
 
-.main-div {
-    border-top: 1px solid rgb(173, 173, 173);
+.main-div{
+    border-top: 1px solid rgb(173, 173, 173) ;
 }
-
-.post-header {
+.post-header{
     display: flex;
 }
 
-#post-btn {
+#post-btn{
     border: none;
     color: #339ce3;
-    background: none;
+    background:none;
     font-weight: bolder;
     cursor: pointer;
-    margin-right: 5px;
 }
 
-.details {
-    border-top: 1px solid rgb(173, 173, 173);
+.details{
+    border-top: 1px solid rgb(173, 173, 173) ;
 }
 
-textarea {
+textarea{
     width: 90%;
     border: none;
     outline: none;
 }
 
-#output {
+#output{
     width: 300px;
     border: none;
     outline: none;
     margin-top: 5px;
-}
-
-/* Media query for smaller screens */
-@media only screen and (max-width: 600px) {
-    .createPost {
-        max-width: 100%;
-        margin: 10px;
-    }
-
-    textarea {
-        width: 100%;
-    }
-
-    #output {
-        width: 100%;
-    }
 }
