@@ -60,7 +60,7 @@ export default function UserProfie() {
       .then((result) => {
         console.log(result);
         setUser(result.user || {}); // Handle the case where result.user is undefined
-        setPosts(result.post || []); // Handle the case where result.post is undefined
+        setPosts(result.posts || []); // Handle the case where result.post is undefined
         if (
           result.user &&
           result.user.followers &&
