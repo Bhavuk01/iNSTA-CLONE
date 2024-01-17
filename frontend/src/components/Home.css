@@ -3,151 +3,109 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 20px;
-  background-color: #fff;
-  border-bottom: 1px solid #ccc;
+  padding: 15px 30px;
+  background-color: #ffffff; /* Dark Blue Background */
+  color: #ecf0f1; /* Light Text Color */
+  border-bottom: 2px solid #3498db; /* Border Color */
 }
 
 .logo img {
-  height: 40px;
+  height: 50px;
 }
 
 .search-bar input {
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  padding: 10px;
+  border: 2px solid #3498db; /* Search Border Color */
+  border-radius: 20px;
+  background-color: #ecf0f1; /* Search Background Color */
+  color: #2c3e50; /* Search Text Color */
 }
 
 .nav-icons a {
-  margin-left: 15px;
+  margin-left: 20px;
   text-decoration: none;
-  color: #333;
+  color: #ecf0f1;
+  font-size: 20px;
+  transition: color 0.3s ease-in-out;
 }
 
 .nav-icons img {
-  height: 30px;
-}
-.card{
-  max-width: 500px;
-  height: max-content;
-  margin: 25px auto;
-  border: 1px solid rgb(173, 173, 173);
-  border-radius: 5px;
+  height: 40px;
 }
 
-.card-header{
+.nav-icons a:hover {
+  color: #3498db; /* Hover Color */
+}
+
+.card {
+  max-width: 600px;
+  margin: 30px auto;
+  border: 2px solid #3498db;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #ecf0f1;
+}
+
+.card-header {
   display: flex;
+  align-items: center;
+  background-color: #3498db;
+  color: #ecf0f1;
+  padding: 10px;
 }
 
-.card-header > h5{
+.card-pic img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.card-header > h5 {
   margin: 0;
-  padding: 11px;
 }
 
-.card-pic img{
-  width: 30px;
-  border-radius: 30px;
+.card-image img {
+  width: 100%;
   height: auto;
-  object-fit: contain;
-  padding: 5px;
 }
 
-.card-image img{
-  width: 100%;
-}
-
-.card-content{
+.card-content {
   text-align: left;
-  line-height: 4px;
-  padding: 3px 10px;
-  border-bottom: 1px solid rgb(173, 173, 173)
+  padding: 10px;
+  border-bottom: 1px solid #3498db;
 }
 
-.add-comment{
+.add-comment {
   display: flex;
   align-items: center;
+  padding: 10px;
 }
 
-.add-comment input{
-  margin: 0;
-  outline: none;
+.add-comment input {
+  flex-grow: 1;
+  margin-right: 10px;
+  padding: 10px;
+  border: 1px solid #3498db;
+  border-radius: 20px;
+}
+
+.comment {
   border: none;
-  padding: 10px
-}
-
-.comment{
-  border: none;
-  background-color: none
-  ;font-weight: bolder;
+  background-color: #3498db;
+  color: #ecf0f1;
+  font-weight: bold;
   cursor: pointer;
-  color: #339ce3;
+  padding: 10px 20px;
+  border-radius: 20px;
 }
 
+/* Add animations and transitions as needed */
 
-.material-symbols-outlined-red {
-  color: red;
-font-variation-settings:
-'FILL' 1,
-'wght' 700,
-'GRAD' 0,
-'opsz' 48
-}
-.material-symbols-outlined{
-  cursor: pointer;
-}
+/* Customize further to fit your design */
 
-.showComment{
-  width: 100vw;
-  min-height:100vh ;
-  position: fixed;
-  top: 0;
-  left: 0;
-  background-color: rgba(16, 13, 13, 0.4);
-  
-}
-
-.container{
-  display: flex;
-  width: 80%;
-  background-color: white;
-  position: absolute;
-  top: 10%;
-  left: 10%;
-  height: 500px;
-}
-
-.postPic{
-  background-color: black;
-  display: flex;
-  align-items: center;
-}
-
-.postPic img{
-  object-fit: contain;
-  width: 100%;
-}
-
-.details{
-  width: 100%;
-  height: inherit;
-  display: flex;
-  flex-direction: column;
-}
-
-.comment-section{
-  flex-grow: 4;
-  text-align: left;
-  margin-left: 10px;
-}
-
-.close-comment{
-  position: fixed;
-  top: 1%;
-  right: 5%;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
 
 
 .material-symbols-outlined-comment {
@@ -157,4 +115,15 @@ font-variation-settings:
 'wght' 700,
 'GRAD' 0,
 'opsz' 48
+
+}.material-symbols-outlined-red {
+  color: red;
+font-variation-settings:
+'FILL' 1,
+'wght' 700,
+'GRAD' 0,
+'opsz' 48
+}
+.material-symbols-outlined{
+  cursor: pointer;
 }

@@ -53,7 +53,7 @@ export default function SignIn() {
     <div className="signIn">
       <div>
         <div className="loginForm">
-         {/*<img className="signUpLogo" src={} alt="" /> */}
+         <img className="signUpLogo" src={"https://www.instaclone.app/img/instaclone-logo-dark.png"} alt="" /> 
           <div>
             <input type="email" name="email" id="email" value={email} placeholder="Email" onChange={(e) => { setEmail(e.target.value) }} />
           </div>

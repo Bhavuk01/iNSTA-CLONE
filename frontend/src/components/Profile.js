@@ -80,7 +80,7 @@ export default function Profile() {
 
       {changePic && <ProfilePic changeprofile={changeProfile} />}
 
-      {show && <PostDetail item={posts} />}
+      {show && <PostDetail item={posts} toggleDetails={toggleDetails} />}
     </div>
   );
 }
