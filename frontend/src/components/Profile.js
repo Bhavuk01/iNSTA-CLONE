@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from "react";
- import PostDetail from "./PostDetail";
+import PostDetail from "./PostDetail";
 import "./Profile.css";
 import ProfilePic from "./ProfilePic";
 
-export default function Profie() {
-  var picLink = "https://cdn-icons-png.flaticon.com/128/3177/3177440.png"
+export default function Profile() {
+  var picLink = "https://cdn-icons-png.flaticon.com/128/3177/3177440.png";
   const [pic, setPic] = useState([]);
-  const [show, setShow] = useState(false)
+  const [show, setShow] = useState(false);
   const [posts, setPosts] = useState([]);
-  const [user, setUser] = useState("")
-  const [changePic, setChangePic] = useState(false)
-
+  const [user, setUser] = useState("");
+  const [changePic, setChangePic] = useState(false);
 
   const toggleDetails = (posts) => {
     if (show) {
@@ -21,14 +20,9 @@ export default function Profie() {
     }
   };
 
-  const changeprofile = () => {
-    if (changePic) {
-      setChangePic(false)
-    } else {
-      setChangePic(true)
-    }
-  }
-
+  const changeProfile = () => {
+    setChangePic(!changePic);
+  };
 
   useEffect(() => {
     fetch(`http://localhost:5000/user/${JSON.parse(localStorage.getItem("user"))._id}`, {
@@ -39,7 +33,7 @@ export default function Profie() {
       .then((res) => res.json())
       .then((result) => {
         console.log(result);
-        setPic(result.post || []); // Use an empty array if result.post is undefined
+        setPic(result.posts || []); // Use an empty array if result.post is undefined
         setUser(result.user);
       });
   }, []);
@@ -51,7 +45,7 @@ export default function Profie() {
         {/* profile-pic */}
         <div className="profile-pic">
           <img
-            onClick={changeprofile}
+            onClick={changeProfile}
             src={user.Photo ? user.Photo : picLink}
             alt=""
           />
@@ -69,7 +63,6 @@ export default function Profie() {
       <hr
         style={{
           width: "90%",
-
           opacity: "0.8",
           margin: "25px auto",
         }}
@@ -88,11 +81,9 @@ export default function Profie() {
           />
         ))}
       </div>
-      
-      {
-        changePic &&
-        <ProfilePic changeprofile={changeprofile} />
-      }
+
+      {changePic && <ProfilePic changeprofile={changeProfile} />}
     </div>
   );
 }
+
