@@ -33,16 +33,14 @@ export default function Profile() {
       .then((res) => res.json())
       .then((result) => {
         console.log(result);
-        setPic(result.posts || []); // Use an empty array if result.post is undefined
+        setPic(result.posts || []);
         setUser(result.user);
       });
   }, []);
 
   return (
     <div className="profile">
-      {/* Profile frame */}
       <div className="profile-frame">
-        {/* profile-pic */}
         <div className="profile-pic">
           <img
             onClick={changeProfile}
@@ -50,7 +48,6 @@ export default function Profile() {
             alt=""
           />
         </div>
-        {/* profile-data */}
         <div className="pofile-data">
           <h1>{JSON.parse(localStorage.getItem("user")).name}</h1>
           <div className="profile-info" style={{ display: "flex" }}>
@@ -67,7 +64,6 @@ export default function Profile() {
           margin: "25px auto",
         }}
       />
-      {/* Gallery */}
       <div className="gallery">
         {pic?.map((pics) => (
           <img
@@ -83,7 +79,8 @@ export default function Profile() {
       </div>
 
       {changePic && <ProfilePic changeprofile={changeProfile} />}
+
+      {show && <PostDetail item={posts} />}
     </div>
   );
 }
-

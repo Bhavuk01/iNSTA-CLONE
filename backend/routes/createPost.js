@@ -96,25 +96,25 @@ router.put("/comment", requireLogin, (req, res) => {
 });
 
 // Api to delete post
-router.delete("/deletePost/:postId", requireLogin, (req, res) => {
-    POST.findOne({ _id: req.params.postId })
-        .populate("postedBy", "_id")
-        .exec((err, post) => {
-            if (err || !post) {
-                return res.status(422).json({ error: err });
-            }
+router.delete("/deletePost/:postId", requireLogin, async (req, res) => {
+    try {
+        const post = await POST.findOne({ _id: req.params.postId })
+            .populate("postedBy", "_id");
 
-            if (post.postedBy._id.toString() == req.user._id.toString()) {
-                post
-                    .remove()
-                    .then(result => {
-                        return res.json({ message: "Successfully deleted" });
-                    })
-                    .catch(err => {
-                        console.log(err);
-                    });
-            }
-        });
+        if (!post) {
+            return res.status(422).json({ error: "Post not found" });
+        }
+
+        if (post.postedBy._id.toString() !== req.user._id.toString()) {
+            return res.status(401).json({ error: "Unauthorized access" });
+        }
+
+        await post.remove();
+        return res.json({ message: "Successfully deleted" });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ error: "Internal server error" });
+    }
 });
 
 // to show following post
